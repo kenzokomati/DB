@@ -21,7 +21,7 @@ Serão fornecidas aos profissionais utilizantes indicações de oportunidades qu
 
 ### 3.PERGUNTAS A SEREM RESPONDIDAS<br>
 
-> A Empresa DevCom precisa inicialmente dos seguintes relatórios:
+> A Empresa Shupy precisa inicialmente dos seguintes relatórios:
 * Relatório pode fornecer informações sobre o progresso dos candidatos em seu desenvolvimento profissional, como cursos concluídos, certificações obtidas, atualizações de currículo e recomendações para aprimoramento profissional.
 * Relatório pode acompanhar a comunicação entre candidatos e empregadores, incluindo o número de interações, o tempo médio de resposta, a satisfação do usuário, etc.
 * Relatório pode incluir recomendações de vagas para candidatos com base em suas informações de perfil. Ele pode indicar o número de vagas recomendadas, a taxa de aceitação dessas recomendações e quais habilidades ou certificações estão sendo mais recomendadas.
@@ -33,17 +33,38 @@ Serão fornecidas aos profissionais utilizantes indicações de oportunidades qu
 ![Screenshot_24](https://github.com/kenzokomati/DB/assets/109813173/93aa82dc-0928-4233-b18d-6336d3c0071d)
     
 #### 5.1 Validação do Modelo Conceitual
-    [Grupo01]: [Nomes dos que participaram na avaliação]
-    [Grupo02]: [Nomes dos que participaram na avaliação]
+    []: []
+    []: []
 
 #### 5.2 Descrição dos dados 
-    [objeto]: [descrição do objeto]
-    
-    EXEMPLO:
-    CLIENTE: Tabela que armazena as informações relativas ao cliente<br>
-    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa.<br>
 
-># Marco de Entrega 01: Do item 1 até o item 5.2 (5 PTS) <br> 
+    CLIENTE: Tabela que armazena as informações relativas ao cliente<br>
+    CPF (Primary Key): Campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa. Este atributo é único para cada cliente e é usado como chave primária<br>
+    Status_Profissional: Campo que descreve o status de profissional do cliente, indicando se ele é um profissional em busca de emprego ou não.
+    Nome: Campo que armazena o nome completo do cliente.
+    Contato: Campo que contém informações de contato do cliente, como número de telefone, endereço de e-mail, ou outros meios de contato.
+    Endereço: Campo que armazena informações sobre o endereço do cliente, incluindo cidade, estado, bairro, rua, número, CEP e complemento, se aplicável.
+    Status de Busca de Emprego: Campo que indica o status atual da busca de emprego do cliente, como "Empregado", "Desempregado", "Estudante", etc.
+    Faixa Salarial Desejada: Campo que especifica a faixa salarial desejada pelo cliente, que pode ser um valor único ou um intervalo, como "R$ 40.000 - R$ 50.000".
+    Preferência de Modalidade de Trabalho: Campo que descreve a preferência do cliente em relação à modalidade de trabalho, como "Trabalho Remoto", "Período Integral", "Meio Período", etc.
+    Área de Atuação: Campo que indica a área de atuação profissional do cliente, como "Tecnologia da Informação", "Saúde", "Engenharia", etc.
+
+    EMPREGADOR: Tabela que armazena informações relativas ao empregador
+    CPF/CNPJ (Primary Key): Campo que armazena o número de Cadastro de Pessoa Física (CPF) ou Cadastro Nacional da Pessoa Jurídica (CNPJ) para cada empregador da empresa. Este atributo é único para cada empregador e é usado como chave primária.
+    Nome: Campo que armazena o nome da empresa ou do empregador.
+    Descrição de Serviços/Produtos: Campo que descreve os serviços ou produtos oferecidos pela empresa ou empregador.
+    CEP: Campo que armazena o Código de Endereçamento Postal (CEP) da localização do empregador.
+    Informações de Contato: Campo que contém informações de contato do empregador, como número de telefone, endereço de e-mail, ou outros meios de contato.
+
+    VAGA: Tabela que armazena informações sobre vagas de emprego
+    Título: Campo que contém o título da vaga de emprego, descrevendo o cargo ou posição disponível.
+    Descrição: Campo que fornece uma descrição detalhada da vaga, incluindo responsabilidades, funções e outros detalhes relevantes sobre o trabalho.
+    Requisitos Obrigatórios: Campo que lista os requisitos essenciais que os candidatos devem atender para se candidatar à vaga. Isso pode incluir qualificações, habilidades específicas, experiência mínima, etc.
+    Requisitos Desejáveis: Campo que lista os requisitos que não são estritamente necessários, mas que são desejáveis para os candidatos. Isso pode incluir habilidades adicionais ou experiência relevante que seria uma vantagem.
+    Localização: Campo que indica a localização física onde a vaga está localizada, como cidade e estado.
+    Estilo de Trabalho: Campo que descreve o estilo de trabalho associado à vaga, como "Presencial", "Remoto", "Híbrido" ou qualquer outro formato específico.
+    Nível Salarial: Campo que especifica o intervalo de salário oferecido para a vaga, como "R$ 4.000 - R$ 5.000" ou qualquer outra faixa salarial relevante.
+    Tipo de Contrato: Campo que indica o tipo de contrato associado à vaga, podendo ser "Temporário", "Integral" (permanente), "Parcial" ou outro tipo específico.
 
 ### 6	MODELO LÓGICO<br>
         a) inclusão do esquema lógico do banco de dados
