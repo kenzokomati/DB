@@ -29,9 +29,9 @@ Serão fornecidas aos profissionais utilizantes indicações de oportunidades qu
 
 ![Screenshot_24](https://github.com/kenzokomati/DB/assets/109813173/93aa82dc-0928-4233-b18d-6336d3c0071d)
 
-Principais fluxos de informação:
-Profissional -> Vaga
-Empregador -> Vaga
+Principais fluxos de informação: <br>
+Profissional -> Vaga <br>
+Empregador -> Vaga <br>
     
 #### 5.1 Validação do Modelo Conceitual
     [Grupo1]: [Giovanna Scalfoni, Filipe Suhett, Bruno Plazzi, Caio Daniel Meireles de Souza]
