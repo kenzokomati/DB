@@ -1,14 +1,11 @@
-# TRABALHO 01:  Título do Trabalho
+# TRABALHO 01:  Indexador de vagas de Emprego
 Trabalho desenvolvido durante a disciplina de BD1
-
-# Sumário
 
 ### 1. COMPONENTES<br>
 Integrantes do grupo<br>
 Erick Kenzo Komati: kenzo.komati@gmail.com <br>
 Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 <br>
-
 
 ### 2.MINI-MUNDO<br>
 
