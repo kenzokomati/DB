@@ -33,8 +33,8 @@ Serão fornecidas aos profissionais utilizantes indicações de oportunidades qu
 ![Screenshot_24](https://github.com/kenzokomati/DB/assets/109813173/93aa82dc-0928-4233-b18d-6336d3c0071d)
     
 #### 5.1 Validação do Modelo Conceitual
-    []: []
-    []: []
+    [Grupo1]: [Giovanna Scalfoni, Filipe Suhett, Bruno Plazzi, Caio Daniel Meireles de Souza]
+    [Grupo2]: [Filipe Moura, João Pedro Spinassé, Marllon Ribeiro, Samuel Ferreira]
 
 #### 5.2 Descrição dos dados 
 
