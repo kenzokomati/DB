@@ -93,7 +93,7 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 ![tabela_profissional](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/326a533a-e35f-408d-a618-a9f732a54d89)
 <br>
 
-    SELECT * FROM empresa e;
+    SELECT * FROM empregador e;
 
 ![tabel_empresa](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/c88a1a7e-dd2d-4c53-af06-22e8c7976d77)
 <br>
