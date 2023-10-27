@@ -89,28 +89,28 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 
 
     SELECT * FROM profissional p;
-<br>
 
+![tabela_profissional](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/326a533a-e35f-408d-a618-a9f732a54d89)
 <br>
 
     SELECT * FROM empresa e;
-<br>
 
+![tabel_empresa](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/c88a1a7e-dd2d-4c53-af06-22e8c7976d77)
 <br>
 
     SELECT * FROM vaga v;
-<br>
 
+![tabela_vaga](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/4f381c6b-8db7-4425-87f3-81278c4b5a62)
 <br>
 
     SELECT * FROM contato c:
-<br>
 
+![tabela_contato](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/a8735db6-b64c-44d3-9472-a5f745428e2a)
 <br>
 
     SELECT * FROM recomendacao r;
-<br>
 
+![tabela_recomendacao](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/8954ab9f-46fb-4429-868e-713e0144883c)
 <br>
 
 #### 9.2.	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
