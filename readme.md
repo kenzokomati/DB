@@ -29,6 +29,8 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 
 ![image](https://github.com/kenzokomati/DB/assets/109813173/eb9cdf67-b110-4c71-98fd-2492bcf2cd42)
 
+> #### Principais entidades do sistema: Profissional, Vaga e Empregador. São as principais entidades envolvidas para a conexão entre empresa e profissional buscando vaga.
+
 > #### Principais fluxos de informação: <br>
 > Profissional -> Vaga <br>
 > Profissional > Habilidade <br>
@@ -38,7 +40,7 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > Conversa -> Profissional <br>
 > Recomendacao -> Profissional <br>
 > Vaga -> Recomendacao <br>
-> Vagaa -> Habilidade <br>
+> Vaga -> Habilidade <br>
 
 
     
@@ -48,7 +50,7 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 
 #### 5.2. Descrição dos dados 
 
-> CLIENTE: Tabela que armazena as informações relativas ao cliente.
+> Profissional: Tabela que armazena as informações relativas ao cliente.
 > * CPF (Primary Key): Campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa. Este atributo é único para cada cliente e é usado como chave primária.
 > * Status_Profissional: Campo que descreve o status de profissional do cliente, indicando se ele é um profissional em busca de emprego ou não.
 > * Nome: Campo que armazena o nome completo do cliente.
@@ -59,37 +61,137 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > * Preferência de Modalidade de Trabalho: Campo que descreve a preferência do cliente em relação à modalidade de trabalho, como "Trabalho Remoto", "Período Integral", "Meio Período", etc.
 > * Área de Atuação: Campo que indica a área de atuação profissional do cliente, como "Tecnologia da Informação", "Saúde", "Engenharia", etc.
 
+> TIPO CONTATO: Tabela que armazena inforamções relativas ao tipo de contato.
+>  * Tipo contato: Campo que informa qual o tipo de contato disponível no sistema.
+
+> CONTATO:Tabela que armazena inforamções relativas ao contato.
+> * Contato: Campo contem efetivamente qual o contato do profissional
+
 > EMPREGADOR: Tabela que armazena informações relativas ao empregador.
-> * CPF/CNPJ (Primary Key): Campo que armazena o número de Cadastro de Pessoa Física (CPF) ou Cadastro Nacional da Pessoa Jurídica (CNPJ) para cada empregador da empresa. Este atributo é único para cada empregador e é usado como chave primária.
+> * CNPJ (Primary Key): Campo que armazena o número de adastro Nacional da Pessoa Jurídica (CNPJ) para cada empregador da empresa. Este atributo é único para cada empregador e é usado como chave primária.
 > * Nome: Campo que armazena o nome da empresa ou do empregador.
 > * Descrição de Serviços/Produtos: Campo que descreve os serviços ou produtos oferecidos pela empresa ou empregador.
 > * CEP: Campo que armazena o Código de Endereçamento Postal (CEP) da localização do empregador.
 > * Informações de Contato: Campo que contém informações de contato do empregador, como número de telefone, endereço de e-mail, ou outros meios de contato.
 
 > VAGA: Tabela que armazena informações sobre vagas de emprego.
+> * Codigo: Identificação única da entidade.
 > * Título: Campo que contém o título da vaga de emprego, descrevendo o cargo ou posição disponível.
 > * Descrição: Campo que fornece uma descrição detalhada da vaga, incluindo responsabilidades, funções e outros detalhes relevantes sobre o trabalho.
-> * Requisitos Obrigatórios: Campo que lista os requisitos essenciais que os candidatos devem atender para se candidatar à vaga. Isso pode incluir qualificações, habilidades específicas, experiência mínima, etc.
+> * Requisitos Obrigatórios: 
 > * Requisitos Desejáveis: Campo que lista os requisitos que não são estritamente necessários, mas que são desejáveis para os candidatos. Isso pode incluir habilidades adicionais ou experiência relevante que seria uma vantagem.
 > * Localização: Campo que indica a localização física onde a vaga está localizada, como cidade e estado.
 > * Estilo de Trabalho: Campo que descreve o estilo de trabalho associado à vaga, como "Presencial", "Remoto", "Híbrido" ou qualquer outro formato específico.
 > * Nível Salarial: Campo que especifica o intervalo de salário oferecido para a vaga, como "R$ 4.000 - R$ 5.000" ou qualquer outra faixa salarial relevante.
 > * Tipo de Contrato: Campo que indica o tipo de contrato associado à vaga, podendo ser "Temporário", "Integral" (permanente), "Parcial" ou outro tipo específico.
 
+> RECOMENDAÇÃO: Tabela armazena informações sobre a recomendação de uma vaga.
+> * Codigo: Identificação única da entidade.
+> * Area: Campo que indica a área de atuação profissional do cliente, como "Tecnologia da Informação", "Saúde", "Engenharia", etc.
+> * Nivel: Campo informa qual o nível de senioriadade a vaga oferece.
+> * Localidade: Campo que indica a localização física onde a vaga está localizada, como cidade e estado.
+> * Anunciante: Campo informa qual o Empregador que está relacionado a vaga.
+
+> HABILIDADE: Campo que lista as skills do profissional e os requisitos essenciais que os candidatos devem atender para se candidatar à vaga. Isso pode incluir qualificações, habilidades específicas, etc.
+> * Codigo: Identificação única da entidade.
+> * Nome habilidade: Campo informa a habilidade possuida.
+
+> CONVERSA
+> * Codigo: Identificação única da entidade.
+> * Mensagem: Campo contém conteúdo da mensagem da conversa.
+> * Remetente: Campo contém código da pessoa que enviou a mensagem.
+> * Destinatário: Campo contém código da pessoa que recebeu a mensagem.
+> * Data: Campo contém data que a mensagem foi enviada.
+
 ### 6.	MODELO LÓGICO<br>
 ![image](https://github.com/kenzokomati/DB/assets/109813173/28e4ec88-2863-4f43-9c4c-d148ff71820a)
 
-
-
 ### 7.	[MODELO FÍSICO](modelo_fisico.sql) <br>
+	drop table if exists concorre;
+	drop table if exists contato;
+	drop table if exists recomendacao;
+	drop table if exists vaga;
+	drop table if exists empregador;
+	drop table if exists profissional;
+	
+	CREATE TABLE PROFISSIONAL (
+	    codigo DECIMAL PRIMARY KEY,
+	    nome VARCHAR,
+	    endereco VARCHAR,
+	    status_busca BOOLEAN,
+	    pretensao_salarial float,
+	    modalidade_trabalho VARCHAR,
+	    area_atuacao VARCHAR
+	);
+	
+	CREATE TABLE EMPREGADOR (
+	    nome VARCHAR,
+	    area_atuacao VARCHAR,
+	    cpf_cnpj VARCHAR PRIMARY KEY,
+	    cep INTEGER,
+	    contato VARCHAR
+	);
+	
+	CREATE TABLE VAGA (
+	    titulo VARCHAR,
+	    descricao VARCHAR,
+	    requisito VARCHAR,
+	    localizacao VARCHAR,
+	    modalidade VARCHAR,
+	    faixa_salarial float,
+	    tipo_contrato VARCHAR,
+	    codigo DECIMAL PRIMARY KEY,
+	    anunciante VARCHAR
+	);
+	
+	alter table vaga add foreign key (anunciante) references empregador (cpf_cnpj) on delete cascade;
+	
+	CREATE TABLE RECOMENDACAO (
+	    codigo DECIMAL PRIMARY KEY,
+	    area_atuacao VARCHAR,
+	    nivel VARCHAR,
+	    localidade VARCHAR,
+	    anunciante VARCHAR,
+	    FK_VAGA DECIMAL,
+	    FK_PROFISSIONAL DECIMAL
+	);
+	
+	alter table recomendacao add foreign key (FK_VAGA) references vaga (codigo) on delete cascade;
+	
+	alter table recomendacao add foreign key (FK_PROFISSIONAL) references profissional (codigo) on delete cascade;
+	
+	CREATE TABLE CONTATO (
+	    codigo DECIMAL PRIMARY KEY,
+	    mensagem VARCHAR,
+	    remetente VARCHAR,
+	    destinatario DECIMAL,
+		data_hora DATE
+	);
 
-      
+	alter table contato add foreign key (remetente) references empregador (cpf_cnpj) on delete cascade;
+
+	alter table contato add foreign key (destinatario) references profissional (codigo) on delete cascade;
+ 
 ### 8.	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
-        a) Script das instruções relativas a inclusão de dados 
-	Requisito mínimo: (Script dev conter: Drop para exclusão de tabelas + create definição de para tabelas e estruturas de dados + insert para dados a serem inseridos)
-        OBS
-	1) Criar um novo banco de dados para testar a restauracao (em caso de falha na restauração o grupo não pontuará neste quesito)
-        2) script deve ser incluso no template em um arquivo no formato .SQL
+	INSERT INTO EMPREGADOR (nome, area_atuacao, cpf_cnpj, cep, contato) VALUES
+	    ('Empresa A', 'Tecnologia', '12345678901', 12345, 'empresaA@email.com'),
+	    ('Empresa B', 'Saúde', '98765432109', 54321, 'empresaB@email.com');
+	
+	INSERT INTO PROFISSIONAL (codigo, nome, endereco, status_busca, pretensao_salarial, modalidade_trabalho, area_atuacao) VALUES
+	    (1, 'João', 'Rua A, 123', TRUE, 5000.00, 'Presencial', 'TI'),
+	    (2, 'Maria', 'Avenida B, 456', TRUE, 6000.00, 'Remoto', 'Saúde');
+	
+	INSERT INTO VAGA (titulo, descricao, requisito, localizacao, modalidade, faixa_salarial, tipo_contrato, codigo, anunciante) VALUES
+	    ('Desenvolvedor Web', 'Descrição da vaga de desenvolvedor web', 'Experiência em HTML, CSS, JavaScript', 'São Paulo', 'Remoto', 6000.00, 'CLT', 1, '12345678901'),
+	    ('Enfermeiro', 'Descrição da vaga de enfermeiro', 'Coren ativo, experiência em hospitais', 'Rio de Janeiro', 'Presencial', 5500.00, 'CLT', 2, '98765432109');
+	
+	INSERT INTO RECOMENDACAO (codigo, area, nivel, localidade, anunciante, FK_VAGA, FK_PROFISSIONAL) VALUES
+	    (1, 'TI', 'Júnior', 'São Paulo', '12345678901', 1, 1),
+	    (2, 'Saúde', 'Pleno', 'Rio de Janeiro', '98765432109', 2, 2);
+	
+	INSERT INTO CONTATO (codigo, mensagem, remetente, destinatario, data_hora) VALUES
+	    (1, 'Olá, tenho interesse na vaga de desenvolvedor web.', '12345678901', 2, '2023-10-26 09:00:00'),
+	    (2, 'Temos uma oportunidade para enfermeiro em nosso hospital.', '98765432109', 1, '2023-10-26 09:30:00');
 
 
 ### 9.	TABELAS E PRINCIPAIS CONSULTAS<br>
