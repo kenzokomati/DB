@@ -27,11 +27,20 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 
 ### 4. MODELO CONCEITUAL<br>
 
-![Screenshot_24](https://github.com/kenzokomati/DB/assets/109813173/93aa82dc-0928-4233-b18d-6336d3c0071d)
+![image](https://github.com/kenzokomati/DB/assets/109813173/eb9cdf67-b110-4c71-98fd-2492bcf2cd42)
 
 > #### Principais fluxos de informação: <br>
 > Profissional -> Vaga <br>
+> Profissional > Habilidade <br>
+> Profissional > TipoContato <br>
 > Empregador -> Vaga <br>
+> Empregador -> Conversa <br>
+> Conversa -> Profissional <br>
+> Recomendacao -> Profissional <br>
+> Vaga -> Recomendacao <br>
+> Vagaa -> Habilidade <br>
+
+
     
 #### 5.1. Validação do Modelo Conceitual
 > [Grupo1](https://github.com/filipesuhett/Trabalho-BD-1-Veiculos): [Bruno Plazzi](https://github.com/brunoplazzi), Caio Daniel Meireles de Souza, [Filipe Suhett](https://github.com/filipesuhett), Giovanna Scalfoni<br>
@@ -68,9 +77,9 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > * Tipo de Contrato: Campo que indica o tipo de contrato associado à vaga, podendo ser "Temporário", "Integral" (permanente), "Parcial" ou outro tipo específico.
 
 ### 6.	MODELO LÓGICO<br>
-        a) inclusão do esquema lógico do banco de dados
-        b) verificação de correspondencia com o modelo conceitual 
-        (não serão aceitos modelos que não estejam em conformidade)
+![image](https://github.com/kenzokomati/DB/assets/109813173/28e4ec88-2863-4f43-9c4c-d148ff71820a)
+
+
 
 ### 7.	[MODELO FÍSICO](modelo_fisico.sql) <br>
 
