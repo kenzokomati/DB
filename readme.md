@@ -97,19 +97,21 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 ![image](https://github.com/kenzokomati/DB/assets/109813173/48cb7e27-fa14-46a0-b91f-52b90306fb59)
 
 ### 7.	[MODELO FÍSICO](modelo_fisico.sql) <br>
-	drop table if exists concorre;
-	drop table if exists contato;
-	drop table if exists recomendacao;
-	drop table if exists vaga;
-	drop table if exists empregador;
-	drop table if exists profissional;
+	DROP TABLE IF EXISTS PROFISSIONAL_HABILIDADE;
+	DROP TABLE IF EXISTS VAGA_HABILIDADE;
+	DROP TABLE IF EXISTS PROFISSIONAL_VAGA;
+	DROP TABLE IF EXISTS VAGA;
+	DROP TABLE IF EXISTS CONVERSA;
+	DROP TABLE IF EXISTS PROFISSIONAL;
+	DROP TABLE IF EXISTS EMPREGADOR;
+	DROP TABLE IF EXISTS HABILIDADE;
 	
 	CREATE TABLE PROFISSIONAL (
-	    codigo DECIMAL PRIMARY KEY,
+	    cpf VARCHAR PRIMARY KEY,
 	    nome VARCHAR,
 	    endereco VARCHAR,
 	    status_busca BOOLEAN,
-	    pretensao_salarial float,
+	    pretensao_salarial DECIMAL,
 	    modalidade_trabalho VARCHAR,
 	    area_atuacao VARCHAR
 	);
@@ -117,9 +119,8 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 	CREATE TABLE EMPREGADOR (
 	    nome VARCHAR,
 	    area_atuacao VARCHAR,
-	    cpf_cnpj VARCHAR PRIMARY KEY,
-	    cep INTEGER,
-	    contato VARCHAR
+	    cnpj VARCHAR PRIMARY KEY,
+	    cep INTEGER
 	);
 	
 	CREATE TABLE VAGA (
@@ -128,60 +129,164 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 	    requisito VARCHAR,
 	    localizacao VARCHAR,
 	    modalidade VARCHAR,
-	    faixa_salarial float,
+	    salario_base DECIMAL,
+	    salario_maximo DECIMAL,
 	    tipo_contrato VARCHAR,
 	    codigo DECIMAL PRIMARY KEY,
 	    anunciante VARCHAR
 	);
 	
-	alter table vaga add foreign key (anunciante) references empregador (cpf_cnpj) on delete cascade;
+	ALTER TABLE VAGA ADD FOREIGN KEY (anunciante) REFERENCES EMPREGADOR (cnpj) ON DELETE CASCADE;
 	
-	CREATE TABLE RECOMENDACAO (
-	    codigo DECIMAL PRIMARY KEY,
-	    area_atuacao VARCHAR,
-	    nivel VARCHAR,
-	    localidade VARCHAR,
-	    anunciante VARCHAR,
-	    FK_VAGA DECIMAL,
-	    FK_PROFISSIONAL DECIMAL
+	CREATE TABLE PROFISSIONAL_VAGA (
+	    profissional VARCHAR,
+	    vaga DECIMAL,
+	    data_inscricao DATE  
 	);
 	
-	alter table recomendacao add foreign key (FK_VAGA) references vaga (codigo) on delete cascade;
+	ALTER TABLE PROFISSIONAL_VAGA ADD FOREIGN KEY (profissional) REFERENCES PROFISSIONAL (cpf) ON DELETE CASCADE;
+	ALTER TABLE PROFISSIONAL_VAGA ADD FOREIGN KEY (vaga) REFERENCES VAGA (codigo) ON DELETE CASCADE;
 	
-	alter table recomendacao add foreign key (FK_PROFISSIONAL) references profissional (codigo) on delete cascade;
+	CREATE TABLE HABILIDADE (
+	    codigo DECIMAL PRIMARY KEY,
+	    nome VARCHAR,
+	    tipo VARCHAR,
+	    area_atuacao VARCHAR
+	);
 	
-	CREATE TABLE CONTATO (
+	CREATE TABLE PROFISSIONAL_HABILIDADE (
+	    profissional VARCHAR,
+	    habilidade DECIMAL
+	);
+	
+	ALTER TABLE PROFISSIONAL_HABILIDADE ADD FOREIGN KEY (profissional) REFERENCES PROFISSIONAL (cpf) ON DELETE CASCADE;
+	ALTER TABLE PROFISSIONAL_HABILIDADE ADD FOREIGN KEY (habilidade) REFERENCES HABILIDADE (codigo) ON DELETE CASCADE;
+	
+	CREATE TABLE VAGA_HABILIDADE (
+	    vaga DECIMAL,
+	    habilidade DECIMAL
+	);
+	
+	ALTER TABLE VAGA_HABILIDADE ADD FOREIGN KEY (vaga) REFERENCES VAGA (codigo) ON DELETE CASCADE;
+	ALTER TABLE VAGA_HABILIDADE ADD FOREIGN KEY (habilidade) REFERENCES HABILIDADE (codigo) ON DELETE CASCADE;
+	
+	CREATE TABLE CONVERSA (
 	    codigo DECIMAL PRIMARY KEY,
 	    mensagem VARCHAR,
+	    data_hora TIMESTAMP,
 	    remetente VARCHAR,
-	    destinatario DECIMAL,
-		data_hora DATE
+	    destinatario VARCHAR
 	);
-
-	alter table contato add foreign key (remetente) references empregador (cpf_cnpj) on delete cascade;
-
-	alter table contato add foreign key (destinatario) references profissional (codigo) on delete cascade;
+	
+	ALTER TABLE CONVERSA ADD FOREIGN KEY (remetente) REFERENCES EMPREGADOR (cnpj) ON DELETE CASCADE;
+	ALTER TABLE CONVERSA ADD FOREIGN KEY (destinatario) REFERENCES PROFISSIONAL (cpf) ON DELETE CASCADE;
  
 ### 8.	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
-	INSERT INTO EMPREGADOR (nome, area_atuacao, cpf_cnpj, cep, contato) VALUES
-	    ('Empresa A', 'Tecnologia', '12345678901', 12345, 'empresaA@email.com'),
-	    ('Empresa B', 'Saúde', '98765432109', 54321, 'empresaB@email.com');
+
+	-- Inserindo mais dados na tabela PROFISSIONAL
+	INSERT INTO PROFISSIONAL VALUES
+	('11122233344', 'João Silva', 'Rua A, 123', true, 5000.00, 'Presencial', 'TI'),
+	('22233344455', 'Maria Oliveira', 'Av. B, 456', true, 6000.00, 'Remoto', 'Marketing'),
+	('33344455566', 'Carlos Santos', 'Rua C, 789', false, 4500.00, 'Presencial', 'Engenharia'),
+	('44455566677', 'Ana Oliveira', 'Av. D, 987', true, 5500.00, 'Remoto', 'TI'),
+	('55566677788', 'Pedro Rocha', 'Rua E, 654', false, 4800.00, 'Presencial', 'Engenharia'),
+	('66677788899', 'Fernanda Silva', 'Av. F, 321', true, 6200.00, 'Remoto', 'Marketing'),
+	('77788899900', 'Lucas Santos', 'Rua G, 987', false, 5100.00, 'Presencial', 'TI'),
+	('88899900011', 'Juliana Lima', 'Av. H, 654', true, 5800.00, 'Remoto', 'Marketing'),
+	('99900011122', 'Ricardo Oliveira', 'Rua I, 789', false, 4900.00, 'Presencial', 'Engenharia'),
+	('12345678900', 'Amanda Costa', 'Av. J, 123', true, 6700.00, 'Remoto', 'TI');
 	
-	INSERT INTO PROFISSIONAL (codigo, nome, endereco, status_busca, pretensao_salarial, modalidade_trabalho, area_atuacao) VALUES
-	    (1, 'João', 'Rua A, 123', TRUE, 5000.00, 'Presencial', 'TI'),
-	    (2, 'Maria', 'Avenida B, 456', TRUE, 6000.00, 'Remoto', 'Saúde');
+	-- Inserindo mais dados na tabela EMPREGADOR
+	INSERT INTO EMPREGADOR VALUES
+	('Empresa A', 'TI', '123456789012034', 54321),
+	('Empresa B', 'Marketing', '560789012345678', 98765),
+	('Empresa C', 'Engenharia', '901234560789012', 12345),
+	('Empresa D', 'TI', '345678901230456', 23456),
+	('Empresa E', 'Engenharia', '789010234507890', 87654),
+	('Empresa F', 'Marketing', '12345678901234', 54321),
+	('Empresa G', 'TI', '567890123450678', 98765),
+	('Empresa H', 'Engenharia', '901234567890012', 12345),
+	('Empresa I', 'Marketing', '345678900123456', 23456),
+	('Empresa J', 'TI', '789012345067890', 87654);
 	
-	INSERT INTO VAGA (titulo, descricao, requisito, localizacao, modalidade, faixa_salarial, tipo_contrato, codigo, anunciante) VALUES
-	    ('Desenvolvedor Web', 'Descrição da vaga de desenvolvedor web', 'Experiência em HTML, CSS, JavaScript', 'São Paulo', 'Remoto', 6000.00, 'CLT', 1, '12345678901'),
-	    ('Enfermeiro', 'Descrição da vaga de enfermeiro', 'Coren ativo, experiência em hospitais', 'Rio de Janeiro', 'Presencial', 5500.00, 'CLT', 2, '98765432109');
+	-- Inserindo mais dados na tabela VAGA
+	INSERT INTO VAGA VALUES
+	('Desenvolvedor Web', 'Desenvolvimento de sites', 'Experiência em HTML, CSS, JavaScript', 'São Paulo', 'Híbrido', 6000.00, 8000.00, 'CLT', 1, '123456789012034'),
+	('Analista de Marketing', 'Elaboração de estratégias de marketing', 'Experiência em redes sociais', 'Rio de Janeiro', 'Remoto', 5000.00, 7000.00, 'PJ', 2, '560789012345678'),
+	('Engenheiro Civil', 'Projeto e execução de obras', 'Experiência em AutoCAD', 'Belo Horizonte', 'Presencial', 7000.00, 9000.00, 'CLT', 3, '901234560789012'),
+	('Analista de Dados', 'Análise de dados para tomada de decisão', 'Experiência em SQL e Python', 'São Paulo', 'Híbrido', 6500.00, 8500.00, 'CLT', 4, '345678901230456'),
+	('Engenheiro Eletricista', 'Projeto e execução de instalações elétricas', 'Experiência em CAD', 'Rio de Janeiro', 'Presencial', 7200.00, 9200.00, 'CLT', 5, '789010234507890'),
+	('Designer Gráfico', 'Criação de peças visuais', 'Experiência em Adobe Creative Suite', 'Belo Horizonte', 'Remoto', 5500.00, 7500.00, 'PJ', 6, '12345678901234'),
+	('Desenvolvedor Mobile', 'Desenvolvimento de aplicativos para dispositivos móveis', 'Experiência em React Native', 'São Paulo', 'Remoto', 7000.00, 9000.00, 'PJ', 7, '567890123450678'),
+	('Analista de SEO', 'Otimização de conteúdo para motores de busca', 'Experiência em ferramentas de análise SEO', 'Rio de Janeiro', 'Presencial', 6000.00, 8000.00, 'CLT', 8, '901234567890012'),
+	('Analista Financeiro', 'Análise e controle de finanças', 'Experiência em Excel e contabilidade', 'São Paulo', 'Remoto', 5800.00, 7800.00, 'PJ', 9, '345678900123456'),
+	('Analista de Recursos Humanos', 'Recrutamento e seleção', 'Experiência em entrevistas e avaliação de candidatos', 'Belo Horizonte', 'Presencial', 5500.00, 7500.00, 'CLT', 10, '789012345067890');
 	
-	INSERT INTO RECOMENDACAO (codigo, area, nivel, localidade, anunciante, FK_VAGA, FK_PROFISSIONAL) VALUES
-	    (1, 'TI', 'Júnior', 'São Paulo', '12345678901', 1, 1),
-	    (2, 'Saúde', 'Pleno', 'Rio de Janeiro', '98765432109', 2, 2);
+	-- Inserindo mais dados na tabela PROFISSIONAL_VAGA
+	INSERT INTO PROFISSIONAL_VAGA VALUES
+	('11122233344', 1, '2023-01-01'),
+	('22233344455', 2, '2023-02-01'),
+	('33344455566', 3, '2023-03-01'),
+	('44455566677', 4, '2023-04-01'),
+	('55566677788', 5, '2023-05-01'),
+	('66677788899', 6, '2023-06-01'),
+	('77788899900', 7, '2023-07-01'),
+	('88899900011', 8, '2023-08-01'),
+	('99900011122', 9, '2023-09-01'),
+	('12345678900', 10, '2023-10-01');
 	
-	INSERT INTO CONTATO (codigo, mensagem, remetente, destinatario, data_hora) VALUES
-	    (1, 'Olá, tenho interesse na vaga de desenvolvedor web.', '12345678901', 2, '2023-10-26 09:00:00'),
-	    (2, 'Temos uma oportunidade para enfermeiro em nosso hospital.', '98765432109', 1, '2023-10-26 09:30:00');
+	-- Inserindo mais dados na tabela HABILIDADE
+	INSERT INTO HABILIDADE VALUES
+	(1, 'Programação', 'Técnica', 'TI'),
+	(2, 'Marketing Digital', 'Técnica', 'Marketing'),
+	(3, 'Projeto de Obras', 'Técnica', 'Engenharia'),
+	(4, 'Análise de Dados', 'Técnica', 'TI'),
+	(5, 'CAD', 'Técnica', 'Engenharia'),
+	(6, 'Adobe Creative Suite', 'Técnica', 'Design'),
+	(7, 'React Native', 'Técnica', 'TI'),
+	(8, 'SEO', 'Técnica', 'Marketing'),
+	(9, 'Análise Financeira', 'Técnica', 'Financeiro'),
+	(10, 'Recrutamento', 'Técnica', 'Recursos Humanos');
+	
+	-- Inserindo mais dados na tabela PROFISSIONAL_HABILIDADE
+	INSERT INTO PROFISSIONAL_HABILIDADE VALUES
+	('11122233344', 1),
+	('22233344455', 2),
+	('33344455566', 3),
+	('44455566677', 4),
+	('55566677788', 5),
+	('66677788899', 6),
+	('77788899900', 7),
+	('88899900011', 8),
+	('99900011122', 9),
+	('12345678900', 10);
+	
+	-- Inserindo mais dados na tabela VAGA_HABILIDADE
+	INSERT INTO VAGA_HABILIDADE VALUES
+	(1, 1),
+	(2, 2),
+	(3, 3),
+	(4, 4),
+	(5, 5),
+	(6, 6),
+	(7, 7),
+	(8, 8),
+	(9, 9),
+	(10, 10);
+	
+	-- Inserindo mais dados na tabela CONVERSA
+	INSERT INTO CONVERSA VALUES
+	(1, 'Olá, temos interesse em sua candidatura.', '2023-01-10 08:00:00', '123456789012034', '111.222.333-44'),
+	(2, 'Gostaríamos de agendar uma entrevista.', '2023-02-15 10:30:00', '560789012345678', '222.333.444-55'),
+	(3, 'Discussão sobre detalhes do projeto.', '2023-03-20 14:45:00', '901234560789012', '333.444.555-66'),
+	(4, 'Convite para entrevista presencial.', '2023-04-10 09:15:00', '345678901230456', '444.555.666-77'),
+	(5, 'Detalhes sobre a vaga de Engenheiro Eletricista.', '2023-05-15 11:45:00', '789010234507890', '555.666.777-88'),
+	(6, 'Discussão sobre prazos de entrega.', '2023-06-20 15:30:00', '12345678901234', '666.777.888-99'),
+	(7, 'Agendamento de teste prático.', '2023-07-25 10:00:00', '567890123450678', '777.888.999-00'),
+	(8, 'Entrevista para vaga de Analista de SEO.', '2023-08-30 14:00:00', '901234567890012', '888.999.000-11'),
+	(9, 'Detalhes sobre a vaga de Analista Financeiro.', '2023-09-05 09:30:00', '345678900123456', '999.000.111-22'),
+	(10, 'Convite para entrevista presencial de Recrutamento.', '2023-10-12 10:00:00', '789012345067890', '123.456.789-00');
+
 
 
 ### 9.	TABELAS E PRINCIPAIS CONSULTAS<br>
