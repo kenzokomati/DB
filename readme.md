@@ -19,11 +19,11 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 ### 3. Perguntas a serem respondidas<br>
 
 > A Empresa Shupy precisa inicialmente dos seguintes relatórios:
-> * Relatório pode fornecer informações sobre o progresso dos candidatos em seu desenvolvimento profissional, como cursos concluídos, certificações obtidas, atualizações de currículo e recomendações para aprimoramento profissional.
-> * Relatório pode acompanhar a comunicação entre candidatos e empregadores, incluindo o número de interações, o tempo médio de resposta, a satisfação do usuário, etc.
-> * Relatório pode incluir recomendações de vagas para candidatos com base em suas informações de perfil. Ele pode indicar o número de vagas recomendadas, a taxa de aceitação dessas recomendações e quais habilidades ou certificações estão sendo mais recomendadas.
+> * Relatório pode informar quantidade de profissionais por área de atuação.
+> * Relatório pode acompanhar a comunicação entre candidatos e empregadores, incluindo o número de interações, pessoas/empresas envolvidas, etc.
+> * Relatório pode informar o número de profissionais inscritas em vagas.
 > * Relatório pode incluir informações sobre o número de vagas disponíveis, setores de emprego mais demandados, requisitos comuns em vagas, localizações das vagas e outros dados relevantes.
-> * Relatório pode fornecer estatísticas sobre os tipos de profissionais que utilizam a plataforma, suas habilidades, experiência, localização geográfica, setor de atuação, etc.
+> * Relatório pode fornecer estatísticas sobre os perfil dos profissionais que utilizam a plataforma, incluindo suas habilidades, experiência, localização geográfica, setor de atuação, etc.
 
 ### 4. MODELO CONCEITUAL<br>
 
@@ -51,7 +51,7 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 #### 5.2. Descrição dos dados 
 
 > Profissional: Tabela que armazena as informações relativas ao cliente.
-> * CPF (Primary Key): Campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa. Este atributo é único para cada cliente e é usado como chave primária.
+> * CPF: Campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa. Este atributo é único para cada cliente e é usado como chave primária.
 > * Status_Profissional: Campo que descreve o status de profissional do cliente, indicando se ele é um profissional em busca de emprego ou não.
 > * Nome: Campo que armazena o nome completo do cliente.
 > * Contato: Campo que contém informações de contato do cliente, como número de telefone, endereço de e-mail, ou outros meios de contato.
@@ -68,29 +68,21 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > * Contato: Campo contem efetivamente qual o contato do profissional
 
 > EMPREGADOR: Tabela que armazena informações relativas ao empregador.
-> * CNPJ (Primary Key): Campo que armazena o número de adastro Nacional da Pessoa Jurídica (CNPJ) para cada empregador da empresa. Este atributo é único para cada empregador e é usado como chave primária.
+> * CNPJ: Campo que armazena o número de adastro Nacional da Pessoa Jurídica (CNPJ) para cada empregador da empresa. Este atributo é único para cada empregador e é usado como chave primária.
 > * Nome: Campo que armazena o nome da empresa ou do empregador.
 > * Descrição de Serviços/Produtos: Campo que descreve os serviços ou produtos oferecidos pela empresa ou empregador.
 > * CEP: Campo que armazena o Código de Endereçamento Postal (CEP) da localização do empregador.
-> * Informações de Contato: Campo que contém informações de contato do empregador, como número de telefone, endereço de e-mail, ou outros meios de contato.
 
 > VAGA: Tabela que armazena informações sobre vagas de emprego.
 > * Codigo: Identificação única da entidade.
 > * Título: Campo que contém o título da vaga de emprego, descrevendo o cargo ou posição disponível.
 > * Descrição: Campo que fornece uma descrição detalhada da vaga, incluindo responsabilidades, funções e outros detalhes relevantes sobre o trabalho.
-> * Requisitos Obrigatórios: 
-> * Requisitos Desejáveis: Campo que lista os requisitos que não são estritamente necessários, mas que são desejáveis para os candidatos. Isso pode incluir habilidades adicionais ou experiência relevante que seria uma vantagem.
 > * Localização: Campo que indica a localização física onde a vaga está localizada, como cidade e estado.
 > * Estilo de Trabalho: Campo que descreve o estilo de trabalho associado à vaga, como "Presencial", "Remoto", "Híbrido" ou qualquer outro formato específico.
 > * Nível Salarial: Campo que especifica o intervalo de salário oferecido para a vaga, como "R$ 4.000 - R$ 5.000" ou qualquer outra faixa salarial relevante.
 > * Tipo de Contrato: Campo que indica o tipo de contrato associado à vaga, podendo ser "Temporário", "Integral" (permanente), "Parcial" ou outro tipo específico.
-
-> RECOMENDAÇÃO: Tabela armazena informações sobre a recomendação de uma vaga.
-> * Codigo: Identificação única da entidade.
-> * Area: Campo que indica a área de atuação profissional do cliente, como "Tecnologia da Informação", "Saúde", "Engenharia", etc.
-> * Nivel: Campo informa qual o nível de senioriadade a vaga oferece.
-> * Localidade: Campo que indica a localização física onde a vaga está localizada, como cidade e estado.
-> * Anunciante: Campo informa qual o Empregador que está relacionado a vaga.
+> * Data de anúncio: Campo informa a data que a vaga foi anunciada na plataforma.
+> * Data limite: Campo que especifica data em que a vaga se encerra.
 
 > HABILIDADE: Campo que lista as skills do profissional e os requisitos essenciais que os candidatos devem atender para se candidatar à vaga. Isso pode incluir qualificações, habilidades específicas, etc.
 > * Codigo: Identificação única da entidade.
@@ -99,8 +91,6 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > CONVERSA
 > * Codigo: Identificação única da entidade.
 > * Mensagem: Campo contém conteúdo da mensagem da conversa.
-> * Remetente: Campo contém código da pessoa que enviou a mensagem.
-> * Destinatário: Campo contém código da pessoa que recebeu a mensagem.
 > * Data: Campo contém data que a mensagem foi enviada.
 
 ### 6.	MODELO LÓGICO<br>
