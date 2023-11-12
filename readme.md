@@ -27,7 +27,7 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 
 ### 4. MODELO CONCEITUAL<br>
 
-![image](https://github.com/kenzokomati/DB/assets/109813173/b73a2c27-98ff-4c15-9899-8b30878e3301)
+![image](https://github.com/kenzokomati/DB/assets/109813173/6b0b2706-8a82-4c93-a85d-e5af9b7f7a73)
 
 > #### Principais entidades do sistema: Profissional, Vaga e Empregador. São as principais entidades envolvidas para a conexão entre empresa e profissional buscando vaga.
 
@@ -94,7 +94,7 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > * Data: Campo contém data que a mensagem foi enviada.
 
 ### 6.	MODELO LÓGICO<br>
-![image](https://github.com/kenzokomati/DB/assets/109813173/48cb7e27-fa14-46a0-b91f-52b90306fb59)
+![image](https://github.com/kenzokomati/DB/assets/109813173/8b010445-e9b7-44aa-a2ff-40d0dc4c2ca7)
 
 ### 7.	[MODELO FÍSICO](modelo_fisico.sql) <br>
 	DROP TABLE IF EXISTS PROFISSIONAL_HABILIDADE;
