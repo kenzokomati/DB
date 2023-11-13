@@ -34,15 +34,10 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > #### Principais fluxos de informação: <br>
 > Profissional -> Vaga <br>
 > Profissional > Habilidade <br>
-> Profissional > TipoContato <br>
-> Empregador -> Vaga <br>
-> Empregador -> Conversa <br>
+> Empresa -> Vaga <br>
+> Empresa -> Conversa <br>
 > Conversa -> Profissional <br>
-> Recomendacao -> Profissional <br>
-> Vaga -> Recomendacao <br>
 > Vaga -> Habilidade <br>
-
-
     
 #### 5.1. Validação do Modelo Conceitual
 > [Grupo1](https://github.com/filipesuhett/Trabalho-BD-1-Veiculos): [Bruno Plazzi](https://github.com/brunoplazzi), Caio Daniel Meireles de Souza, [Filipe Suhett](https://github.com/filipesuhett), Giovanna Scalfoni<br>
@@ -57,17 +52,11 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > * Contato: Campo que contém informações de contato do cliente, como número de telefone, endereço de e-mail, ou outros meios de contato.
 > * Endereço: Campo que armazena informações sobre o endereço do cliente, incluindo cidade, estado, bairro, rua, número, CEP e complemento, se aplicável.
 > * Status de Busca de Emprego: Campo que indica o status atual da busca de emprego do cliente, como "Empregado", "Desempregado", "Estudante", etc.
-> * Faixa Salarial Desejada: Campo que especifica a faixa salarial desejada pelo cliente, que pode ser um valor único ou um intervalo, como "R$ 40.000 - R$ 50.000".
+> * Pretensão Salarial Desejada: Campo que especifica a faixa salarial desejada pelo cliente, que pode ser um valor único ou um intervalo, como "R$ 40.000 - R$ 50.000".
 > * Preferência de Modalidade de Trabalho: Campo que descreve a preferência do cliente em relação à modalidade de trabalho, como "Trabalho Remoto", "Período Integral", "Meio Período", etc.
 > * Área de Atuação: Campo que indica a área de atuação profissional do cliente, como "Tecnologia da Informação", "Saúde", "Engenharia", etc.
 
-> TIPO CONTATO: Tabela que armazena inforamções relativas ao tipo de contato.
->  * Tipo contato: Campo que informa qual o tipo de contato disponível no sistema.
-
-> CONTATO:Tabela que armazena inforamções relativas ao contato.
-> * Contato: Campo contem efetivamente qual o contato do profissional
-
-> EMPREGADOR: Tabela que armazena informações relativas ao empregador.
+> EMPRESA: Tabela que armazena informações relativas ao empregador.
 > * CNPJ: Campo que armazena o número de adastro Nacional da Pessoa Jurídica (CNPJ) para cada empregador da empresa. Este atributo é único para cada empregador e é usado como chave primária.
 > * Nome: Campo que armazena o nome da empresa ou do empregador.
 > * Descrição de Serviços/Produtos: Campo que descreve os serviços ou produtos oferecidos pela empresa ou empregador.
@@ -79,7 +68,8 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > * Descrição: Campo que fornece uma descrição detalhada da vaga, incluindo responsabilidades, funções e outros detalhes relevantes sobre o trabalho.
 > * Localização: Campo que indica a localização física onde a vaga está localizada, como cidade e estado.
 > * Estilo de Trabalho: Campo que descreve o estilo de trabalho associado à vaga, como "Presencial", "Remoto", "Híbrido" ou qualquer outro formato específico.
-> * Nível Salarial: Campo que especifica o intervalo de salário oferecido para a vaga, como "R$ 4.000 - R$ 5.000" ou qualquer outra faixa salarial relevante.
+> * Salario base: Campo que especifica o valor de salário inicial ofertado pela empresa para dada vaga.
+> * Salario maximo: Campo que especifica o valor máximo ofertado pela empresa para dada vaga.
 > * Tipo de Contrato: Campo que indica o tipo de contrato associado à vaga, podendo ser "Temporário", "Integral" (permanente), "Parcial" ou outro tipo específico.
 > * Data de anúncio: Campo informa a data que a vaga foi anunciada na plataforma.
 > * Data limite: Campo que especifica data em que a vaga se encerra.
@@ -87,6 +77,8 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > HABILIDADE: Campo que lista as skills do profissional e os requisitos essenciais que os candidatos devem atender para se candidatar à vaga. Isso pode incluir qualificações, habilidades específicas, etc.
 > * Codigo: Identificação única da entidade.
 > * Nome habilidade: Campo informa a habilidade possuida.
+> * Tipo: Campo que especifica se a habilidade é uma Soft skill ou Hard skill.
+> * Area de atuação: Campo informa a área em qual a habilidade se aplica.
 
 > CONVERSA
 > * Codigo: Identificação única da entidade.
@@ -97,13 +89,16 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 ![image](https://github.com/kenzokomati/DB/assets/109813173/8b010445-e9b7-44aa-a2ff-40d0dc4c2ca7)
 
 ### 7.	[MODELO FÍSICO](modelo_fisico.sql) <br>
+
 	DROP TABLE IF EXISTS PROFISSIONAL_HABILIDADE;
 	DROP TABLE IF EXISTS VAGA_HABILIDADE;
 	DROP TABLE IF EXISTS PROFISSIONAL_VAGA;
+	DROP VIEW vaga_data_inscricao;
 	DROP TABLE IF EXISTS VAGA;
 	DROP TABLE IF EXISTS CONVERSA;
 	DROP TABLE IF EXISTS PROFISSIONAL;
 	DROP TABLE IF EXISTS EMPREGADOR;
+	DROP TABLE IF EXISTS EMPRESA;
 	DROP TABLE IF EXISTS HABILIDADE;
 	
 	CREATE TABLE PROFISSIONAL (
@@ -132,6 +127,8 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 	    salario_base DECIMAL,
 	    salario_maximo DECIMAL,
 	    tipo_contrato VARCHAR,
+	    data_anuncio DATE,
+	    data_fim DATE,
 	    codigo DECIMAL PRIMARY KEY,
 	    anunciante VARCHAR
 	);
@@ -182,7 +179,7 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 	ALTER TABLE CONVERSA ADD FOREIGN KEY (destinatario) REFERENCES PROFISSIONAL (cpf) ON DELETE CASCADE;
  
 ### 8.	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
-
+	
 	-- Inserindo mais dados na tabela PROFISSIONAL
 	INSERT INTO PROFISSIONAL VALUES
 	('11122233344', 'João Silva', 'Rua A, 123', true, 5000.00, 'Presencial', 'TI'),
@@ -211,16 +208,16 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 	
 	-- Inserindo mais dados na tabela VAGA
 	INSERT INTO VAGA VALUES
-	('Desenvolvedor Web', 'Desenvolvimento de sites', 'Experiência em HTML, CSS, JavaScript', 'São Paulo', 'Híbrido', 6000.00, 8000.00, 'CLT', 1, '123456789012034'),
-	('Analista de Marketing', 'Elaboração de estratégias de marketing', 'Experiência em redes sociais', 'Rio de Janeiro', 'Remoto', 5000.00, 7000.00, 'PJ', 2, '560789012345678'),
-	('Engenheiro Civil', 'Projeto e execução de obras', 'Experiência em AutoCAD', 'Belo Horizonte', 'Presencial', 7000.00, 9000.00, 'CLT', 3, '901234560789012'),
-	('Analista de Dados', 'Análise de dados para tomada de decisão', 'Experiência em SQL e Python', 'São Paulo', 'Híbrido', 6500.00, 8500.00, 'CLT', 4, '345678901230456'),
-	('Engenheiro Eletricista', 'Projeto e execução de instalações elétricas', 'Experiência em CAD', 'Rio de Janeiro', 'Presencial', 7200.00, 9200.00, 'CLT', 5, '789010234507890'),
-	('Designer Gráfico', 'Criação de peças visuais', 'Experiência em Adobe Creative Suite', 'Belo Horizonte', 'Remoto', 5500.00, 7500.00, 'PJ', 6, '12345678901234'),
-	('Desenvolvedor Mobile', 'Desenvolvimento de aplicativos para dispositivos móveis', 'Experiência em React Native', 'São Paulo', 'Remoto', 7000.00, 9000.00, 'PJ', 7, '567890123450678'),
-	('Analista de SEO', 'Otimização de conteúdo para motores de busca', 'Experiência em ferramentas de análise SEO', 'Rio de Janeiro', 'Presencial', 6000.00, 8000.00, 'CLT', 8, '901234567890012'),
-	('Analista Financeiro', 'Análise e controle de finanças', 'Experiência em Excel e contabilidade', 'São Paulo', 'Remoto', 5800.00, 7800.00, 'PJ', 9, '345678900123456'),
-	('Analista de Recursos Humanos', 'Recrutamento e seleção', 'Experiência em entrevistas e avaliação de candidatos', 'Belo Horizonte', 'Presencial', 5500.00, 7500.00, 'CLT', 10, '789012345067890');
+	('Desenvolvedor Web', 'Desenvolvimento de sites', 'Experiência em HTML, CSS, JavaScript', 'São Paulo', 'Híbrido', 6000.00, 8000.00, 'CLT', '2023-11-01', '2023-12-01', 1, '123456789012034'),
+	('Analista de Marketing', 'Elaboração de estratégias de marketing', 'Experiência em redes sociais', 'Rio de Janeiro', 'Remoto', 5000.00, 7000.00, 'PJ', '2023-11-02', '2023-12-02', 2, '560789012345678'),
+	('Engenheiro Civil', 'Projeto e execução de obras', 'Experiência em AutoCAD', 'Belo Horizonte', 'Presencial', 7000.00, 9000.00, 'CLT', '2023-11-03', '2023-12-03', 3, '901234560789012'),
+	('Analista de Dados', 'Análise de dados para tomada de decisão', 'Experiência em SQL e Python', 'São Paulo', 'Híbrido', 6500.00, 8500.00, 'CLT', '2023-11-04', '2023-12-04', 4, '345678901230456'),
+	('Engenheiro Eletricista', 'Projeto e execução de instalações elétricas', 'Experiência em CAD', 'Rio de Janeiro', 'Presencial', 7200.00, 9200.00, 'CLT', '2023-11-05', '2023-12-05', 5, '789010234507890'),
+	('Designer Gráfico', 'Criação de peças visuais', 'Experiência em Adobe Creative Suite', 'Belo Horizonte', 'Remoto', 5500.00, 7500.00, 'PJ', '2023-11-06', '2023-12-06', 6, '12345678901234'),
+	('Desenvolvedor Mobile', 'Desenvolvimento de aplicativos para dispositivos móveis', 'Experiência em React Native', 'São Paulo', 'Remoto', 7000.00, 9000.00, 'PJ', '2023-11-07', '2023-12-07', 7, '567890123450678'),
+	('Analista de SEO', 'Otimização de conteúdo para motores de busca', 'Experiência em ferramentas de análise SEO', 'Rio de Janeiro', 'Presencial', 6000.00, 8000.00, 'CLT', '2023-11-08', '2023-12-08', 8, '901234567890012'),
+	('Analista Financeiro', 'Análise e controle de finanças', 'Experiência em Excel e contabilidade', 'São Paulo', 'Remoto', 5800.00, 7800.00, 'PJ', '2023-11-09', '2023-12-09', 9, '345678900123456'),
+	('Analista de Recursos Humanos', 'Recrutamento e seleção', 'Experiência em entrevistas e avaliação de candidatos', 'Belo Horizonte', 'Presencial', 5500.00, 7500.00, 'CLT', '2023-11-10', '2023-12-10', 10, '789012345067890');
 	
 	-- Inserindo mais dados na tabela PROFISSIONAL_VAGA
 	INSERT INTO PROFISSIONAL_VAGA VALUES
@@ -237,16 +234,16 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 	
 	-- Inserindo mais dados na tabela HABILIDADE
 	INSERT INTO HABILIDADE VALUES
-	(1, 'Programação', 'Técnica', 'TI'),
-	(2, 'Marketing Digital', 'Técnica', 'Marketing'),
-	(3, 'Projeto de Obras', 'Técnica', 'Engenharia'),
-	(4, 'Análise de Dados', 'Técnica', 'TI'),
-	(5, 'CAD', 'Técnica', 'Engenharia'),
-	(6, 'Adobe Creative Suite', 'Técnica', 'Design'),
-	(7, 'React Native', 'Técnica', 'TI'),
-	(8, 'SEO', 'Técnica', 'Marketing'),
-	(9, 'Análise Financeira', 'Técnica', 'Financeiro'),
-	(10, 'Recrutamento', 'Técnica', 'Recursos Humanos');
+	(1, 'Programação', 'Hard', 'TI'),
+	(2, 'Marketing Digital', 'Hard', 'Marketing'),
+	(3, 'Projeto de Obras', 'Hard', 'Engenharia'),
+	(4, 'Análise de Dados', 'Hard', 'TI'),
+	(5, 'CAD', 'Hard', 'Engenharia'),
+	(6, 'Adobe Creative Suite', 'Hard', 'Design'),
+	(7, 'React Native', 'Hard', 'TI'),
+	(8, 'Liderança', 'Soft', 'Comportamental'),
+	(9, 'Oratória', 'Soft', 'Comportamental'),
+	(10, 'Trabalho em equipe', 'Soft', 'Comportamental');
 	
 	-- Inserindo mais dados na tabela PROFISSIONAL_HABILIDADE
 	INSERT INTO PROFISSIONAL_HABILIDADE VALUES
@@ -276,83 +273,38 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 	
 	-- Inserindo mais dados na tabela CONVERSA
 	INSERT INTO CONVERSA VALUES
-	(1, 'Olá, temos interesse em sua candidatura.', '2023-01-10 08:00:00', '123456789012034', '111.222.333-44'),
-	(2, 'Gostaríamos de agendar uma entrevista.', '2023-02-15 10:30:00', '560789012345678', '222.333.444-55'),
-	(3, 'Discussão sobre detalhes do projeto.', '2023-03-20 14:45:00', '901234560789012', '333.444.555-66'),
-	(4, 'Convite para entrevista presencial.', '2023-04-10 09:15:00', '345678901230456', '444.555.666-77'),
-	(5, 'Detalhes sobre a vaga de Engenheiro Eletricista.', '2023-05-15 11:45:00', '789010234507890', '555.666.777-88'),
-	(6, 'Discussão sobre prazos de entrega.', '2023-06-20 15:30:00', '12345678901234', '666.777.888-99'),
-	(7, 'Agendamento de teste prático.', '2023-07-25 10:00:00', '567890123450678', '777.888.999-00'),
-	(8, 'Entrevista para vaga de Analista de SEO.', '2023-08-30 14:00:00', '901234567890012', '888.999.000-11'),
-	(9, 'Detalhes sobre a vaga de Analista Financeiro.', '2023-09-05 09:30:00', '345678900123456', '999.000.111-22'),
-	(10, 'Convite para entrevista presencial de Recrutamento.', '2023-10-12 10:00:00', '789012345067890', '123.456.789-00');
-
-
+	(1, 'Olá, temos interesse em sua candidatura.', '2023-01-10 08:00:00', '123456789012034', '11122233344'),
+	(2, 'Gostaríamos de agendar uma entrevista.', '2023-02-15 10:30:00', '560789012345678', '22233344455'),
+	(3, 'Discussão sobre detalhes do projeto.', '2023-03-20 14:45:00', '901234560789012', '33344455566'),
+	(4, 'Convite para entrevista presencial.', '2023-04-10 09:15:00', '345678901230456', '44455566677'),
+	(5, 'Detalhes sobre a vaga de Engenheiro Eletricista.', '2023-05-15 11:45:00', '789010234507890', '55566677788'),
+	(6, 'Discussão sobre prazos de entrega.', '2023-06-20 15:30:00', '12345678901234', '66677788899'),
+	(7, 'Agendamento de teste prático.', '2023-07-25 10:00:00', '567890123450678', '77788899900'),
+	(8, 'Entrevista para vaga de Analista de SEO.', '2023-08-30 14:00:00', '901234567890012', '88899900011'),
+	(9, 'Detalhes sobre a vaga de Analista Financeiro.', '2023-09-05 09:30:00', '345678900123456', '99900011122'),
+	(10, 'Convite para entrevista presencial de Recrutamento.', '2023-10-12 10:00:00', '789012345067890', '12345678900');
 
 ### 9.	TABELAS E PRINCIPAIS CONSULTAS<br>
     
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
 
-
-    SELECT * FROM profissional p;
-
-![tabela_profissional](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/326a533a-e35f-408d-a618-a9f732a54d89)
-<br>
-
-    SELECT * FROM empregador e;
-
-![tabel_empresa](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/c88a1a7e-dd2d-4c53-af06-22e8c7976d77)
-<br>
-
-    SELECT * FROM vaga v;
-
-![tabela_vaga](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/4f381c6b-8db7-4425-87f3-81278c4b5a62)
-<br>
-
-    SELECT * FROM contato c:
-
-![tabela_contato](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/a8735db6-b64c-44d3-9472-a5f745428e2a)
-<br>
-
-    SELECT * FROM recomendacao r;
-
-![tabela_recomendacao](https://github.com/jhonataplt/trabalho-bd-01/assets/103711264/8954ab9f-46fb-4429-868e-713e0144883c)
-<br>
-
 #### 9.2.	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
 
 #### 9.3.	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
-    a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
-    b) Criar no mínimo 3 consultas com operadores aritméticos 
-    c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
 
 #### 9.4.	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
-    a) Criar outras 5 consultas que envolvam like ou ilike
-    b) Criar uma consulta para cada tipo de função data apresentada.
 
 #### 9.5.	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
-    a) Criar minimo 3 de exclusão
-    b) Criar minimo 3 de atualização
 
 #### 9.6.	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
-    a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado
-    b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho
 
 #### 9.7.	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
-    a) Criar minimo 2 envolvendo algum tipo de junção
 
 #### 9.8.	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
-    a) Criar minimo 1 de cada tipo
 
 #### 9.9.	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
-        a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
-        b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
 
 #### 9.10.	SUBCONSULTAS (Mínimo 4)<br>
-     a) Criar minimo 1 envolvendo GROUP BY
-     b) Criar minimo 1 envolvendo algum tipo de junção
-
-># Marco de Entrega 03: Do item 9.2 até o ítem 9.10 (10 PTS)<br>
 
 ### 10 RELATÓRIOS E GRÁFICOS
 
