@@ -285,7 +285,9 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 	(10, 'Convite para entrevista presencial de Recrutamento.', '2023-10-12 10:00:00', '789012345067890', '12345678900');
 
 ### 9.	TABELAS E PRINCIPAIS CONSULTAS<br>
-    
+
+https://colab.research.google.com/drive/15rgaSOQa76Fq6dMLtPfG7LJmF8TpsrZ0?usp=sharing
+
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
 
 #### 9.2.	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
