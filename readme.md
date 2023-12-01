@@ -27,7 +27,7 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 
 ### 4. MODELO CONCEITUAL<br>
 
-![image](https://github.com/kenzokomati/DB/assets/109813173/6b0b2706-8a82-4c93-a85d-e5af9b7f7a73)
+![conceitual](https://github.com/kenzokomati/DB/assets/109813173/85070fa7-4995-45ad-a05f-b00ac66dd323)
 
 > #### Principais entidades do sistema: Profissional, Vaga e Empregador. São as principais entidades envolvidas para a conexão entre empresa e profissional buscando vaga.
 
@@ -86,7 +86,8 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > * Data: Campo contém data que a mensagem foi enviada.
 
 ### 6.	MODELO LÓGICO<br>
-![image](https://github.com/kenzokomati/DB/assets/109813173/8b010445-e9b7-44aa-a2ff-40d0dc4c2ca7)
+
+![logico](https://github.com/kenzokomati/DB/assets/109813173/cd78a434-ff04-4b5c-88d7-24ff61d0cf18)
 
 ### 7.	[MODELO FÍSICO](modelo_fisico.sql) <br>
 
@@ -421,7 +422,6 @@ https://help.github.com/articles/basic-writing-and-formatting-syntax/
 ##### Basic Formatting in Git
     
     https://help.github.com/articles/basic-writing-and-formatting-syntax/#referencing-issues-and-pull-requests
-    
     
 ##### Working with advanced formatting
     https://help.github.com/articles/working-with-advanced-formatting/
