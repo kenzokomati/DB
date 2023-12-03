@@ -1083,25 +1083,6 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 
 https://colab.research.google.com/drive/15rgaSOQa76Fq6dMLtPfG7LJmF8TpsrZ0?usp=sharing
 
-#### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
-
-#### 9.2.	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
-
-#### 9.3.	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
-
-#### 9.4.	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
-
-#### 9.5.	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
-
-#### 9.6.	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
-
-#### 9.7.	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
-
-#### 9.8.	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
-
-#### 9.9.	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
-
-#### 9.10.	SUBCONSULTAS (Mínimo 4)<br>
 
 ### 10 RELATÓRIOS E GRÁFICOS
 
