@@ -20,10 +20,10 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 
 > A Empresa Shupy precisa inicialmente dos seguintes relatórios:
 > * Relatório pode informar quantidade de profissionais por área de atuação.
-> * Relatório pode acompanhar a comunicação entre candidatos e empregadores, incluindo o número de interações, pessoas/empresas envolvidas, etc.
+> * Relatório pode acompanhar a contatos diretos de empregadores com profissionais por área
 > * Relatório pode informar o número de profissionais inscritas em vagas.
-> * Relatório pode incluir informações sobre o número de vagas disponíveis, setores de emprego mais demandados, requisitos comuns em vagas, localizações das vagas e outros dados relevantes.
-> * Relatório pode fornecer estatísticas sobre os perfil dos profissionais que utilizam a plataforma, incluindo suas habilidades, experiência, localização geográfica, setor de atuação, etc.
+> * Relatório pode incluir informações sobre a compatibilidade entre profissionais e vagas por habilidades.
+> * Relatório pode informar habilidades mais procuradas.
 
 ### 4. MODELO CONCEITUAL<br>
 
@@ -45,16 +45,15 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 
 #### 5.2. Descrição dos dados 
 
-> Profissional: Tabela que armazena as informações relativas ao cliente.
-> * CPF: Campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa. Este atributo é único para cada cliente e é usado como chave primária.
-> * Status_Profissional: Campo que descreve o status de profissional do cliente, indicando se ele é um profissional em busca de emprego ou não.
-> * Nome: Campo que armazena o nome completo do cliente.
-> * Contato: Campo que contém informações de contato do cliente, como número de telefone, endereço de e-mail, ou outros meios de contato.
-> * Endereço: Campo que armazena informações sobre o endereço do cliente, sendo ele o pais onde reside.
-> * Status de Busca de Emprego: Campo que indica o status atual da busca de emprego do cliente, como "Empregado", "Desempregado", "Estudante", etc.
-> * Pretensão Salarial Desejada: Campo que especifica a faixa salarial desejada pelo cliente, que pode ser um valor único ou um intervalo, como "R$ 40.000 - R$ 50.000".
-> * Preferência de Modalidade de Trabalho: Campo que descreve a preferência do cliente em relação à modalidade de trabalho, como "Trabalho Remoto", "Período Integral", "Meio Período", etc.
-> * Área de Atuação: Campo que indica a área de atuação profissional do cliente, como "Tecnologia da Informação", "Saúde", "Engenharia", etc.
+> Profissional: Tabela que armazena as informações relativas ao profissional.
+> * CPF: Campo que armazena o número de Cadastro de Pessoa Física para cada profissional. Este atributo é único para cada profissional e é usado como chave primária.
+> * Status_Profissional: Campo que descreve o status de profissional do profissional, indicando se ele é um profissional em busca de emprego ou não.
+> * Nome: Campo que armazena o nome completo do profissional.
+> * Contato: Campo que contém informações de contato do profissional, como número de telefone, endereço de e-mail, ou outros meios de contato.
+> * Endereço: Campo que armazena informações sobre o endereço do profissional, sendo ele o pais onde reside.
+> * Pretensão Salarial Desejada: Campo que especifica a faixa salarial desejada pelo profissional, que pode ser um valor único ou um intervalo, como "R$ 40.000 - R$ 50.000".
+> * Preferência de Modalidade de Trabalho: Campo que descreve a preferência do profissional em relação à modalidade de trabalho, como "Trabalho Remoto", "Período Integral", "Meio Período", etc.
+> * Área de Atuação: Campo que indica a área de atuação profissional do profissional, como "Engenharia de Software", "Suporte Técnico", "Desenvolvedor de Software", etc.
 
 > EMPRESA: Tabela que armazena informações relativas ao empregador.
 > * CNPJ: Campo que armazena o número de adastro Nacional da Pessoa Jurídica (CNPJ) para cada empregador da empresa. Este atributo é único para cada empregador e é usado como chave primária.
@@ -66,18 +65,18 @@ Jhonata Polito Demuner: jhonata.demuner@gmail.com <br>
 > * Codigo: Identificação única da entidade.
 > * Título: Campo que contém o título da vaga de emprego, descrevendo o cargo ou posição disponível.
 > * Descrição: Campo que fornece uma descrição detalhada da vaga, incluindo responsabilidades, funções e outros detalhes relevantes sobre o trabalho.
-> * Localização: Campo que indica a localização física onde a vaga está localizada, pais de origem.
-> * Estilo de Trabalho: Campo que descreve o estilo de trabalho associado à vaga, como "Presencial", "Remoto", "Híbrido" ou qualquer outro formato específico.
+> * Localização: Campo que indica a localização física onde a vaga está localizada.
+> * Modalidade: Campo que descreve o estilo de trabalho associado à vaga, como "Presencial" ou "Remoto".
 > * Salario base: Campo que especifica o valor de salário inicial ofertado pela empresa para dada vaga.
 > * Salario maximo: Campo que especifica o valor máximo ofertado pela empresa para dada vaga.
-> * Tipo de Contrato: Campo que indica o tipo de contrato associado à vaga, podendo ser "Temporário", "Integral" (permanente), "Parcial" ou outro tipo específico.
+> * Tipo de Contrato: Campo que indica o tipo de contrato associado à vaga, podendo ser "CLT" ou "PJ".
 > * Data de anúncio: Campo informa a data que a vaga foi anunciada na plataforma.
 > * Data limite: Campo que especifica data em que a vaga se encerra.
 
-> HABILIDADE: Campo que lista as skills do profissional e os requisitos essenciais que os candidatos devem atender para se candidatar à vaga. Isso pode incluir qualificações, habilidades específicas, etc.
+> HABILIDADE: Entidade que representa as habilidades do profissional ou as habilidades que os candidatos devem atender para se candidatar à vaga. Isso pode incluir qualificações, habilidades específicas, etc.
 > * Codigo: Identificação única da entidade.
 > * Nome habilidade: Campo informa a habilidade possuida.
-> * Tipo: Campo que especifica se a habilidade é uma Soft skill ou Hard skill.
+> * Tipo: Campo que especifica se a habilidade é "Técnica" ou "Comportamental".
 > * Area de atuação: Campo informa a área em qual a habilidade se aplica.
 
 > CONVERSA
@@ -1089,10 +1088,10 @@ https://colab.research.google.com/drive/15rgaSOQa76Fq6dMLtPfG7LJmF8TpsrZ0?usp=sh
 https://colab.research.google.com/drive/1WW4Fj4dMy7XJxHXLgys3U3fBBBuF1gth#scrollTo=HtUPoY613UUc
 
 
-### 11	AJUSTES DA DOCUMENTAÇÃO, CRIAÇÃO DOS SLIDES E VÍDEO PARA APRESENTAÇAO FINAL <br>
+### 11 APRESENTAÇAO FINAL <br>
 
-#### a) Modelo (pecha kucha)<br>
+#### a) Apresentação (Pecha Kucha)<br>
 https://docs.google.com/presentation/d/1xwYLmWuPDVgDEjb64JkogORGCbiV8JI-DehTdWOZMTI/edit#slide=id.g2a0f283a160_0_272<br>
 
-#### b) Tempo de apresentação 6:40 
+#### b) Vídeo (Pecha Kucha) 
 https://www.youtube.com/watch?v=cM6bbV76HlE <br>
